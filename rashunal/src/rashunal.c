@@ -5,9 +5,10 @@
 Rashunal* n_Rashunal(int numerator, int denominator)
 {
     Rashunal* result = malloc(sizeof(Rashunal));
-    int g = gcd(numerator, denominator);
-    result->numerator = numerator / g;
-    result->denominator = denominator / g;
+    int abs_d = abs(denominator);
+    int g = gcd(abs(numerator), abs_d);
+    result->numerator = (denominator >= 0 ? 1 : -1) * numerator / g;
+    result->denominator = abs_d / g;
     return result;
 }
 
