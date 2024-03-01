@@ -1,14 +1,23 @@
 #include <stdlib.h>
+#include <string.h>
 #include "rashunal.h"
 #include "rashunal_util.h"
 
 Rashunal* n_Rashunal(int numerator, int denominator)
 {
-    Rashunal* result = malloc(sizeof(Rashunal));
     int abs_d = abs(denominator);
     int g = gcd(abs(numerator), abs_d);
-    result->numerator = (denominator >= 0 ? 1 : -1) * numerator / g;
-    result->denominator = abs_d / g;
+    int n = (denominator >= 0 ? 1 : -1) * numerator / g;
+    int d = abs_d / g;
+    Rashunal r =
+    {
+        numerator = n,
+        denominator = d
+    };
+    Rashunal *result = malloc(sizeof(Rashunal));
+    if (result) {
+        memcpy(result, &r, sizeof(Rashunal));
+    }
     return result;
 }
 

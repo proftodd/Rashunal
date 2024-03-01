@@ -3,8 +3,8 @@
 
 typedef struct
 {
-    int numerator;
-    int denominator;
+    const int numerator;
+    const int denominator;
 } Rashunal;
 
 int gcd(int a, int b);
