@@ -1,3 +1,4 @@
+#include <signal.h>
 #include <stdlib.h>
 #include <string.h>
 #include "rashunal.h"
@@ -5,6 +6,14 @@
 
 Rashunal* n_Rashunal(int numerator, int denominator)
 {
+    if (denominator == 0) {
+        raise(SIGFPE);
+    }
+
+    if (numerator == 0) {
+        denominator = 1;
+    }
+
     int abs_d = abs(denominator);
     int g = gcd(abs(numerator), abs_d);
     int n = (denominator >= 0 ? 1 : -1) * numerator / g;
