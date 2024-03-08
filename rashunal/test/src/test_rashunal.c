@@ -52,9 +52,9 @@ void test_n_Rashunal_raises_SIGFPE_if_denominator_is_zero()
 
 void test_add()
 {
-    Rashunal* a = n_Rashunal(1, 2);
-    Rashunal* b = n_Rashunal(1, 3);
-    Rashunal* c = r_add(a, b);
+    Rashunal *a = n_Rashunal(1, 2);
+    Rashunal *b = n_Rashunal(1, 3);
+    Rashunal *c = r_add(a, b);
     Rashunal *e = n_Rashunal(5, 6);
     TEST_ASSERT_EQUAL(5, c->numerator);
     TEST_ASSERT_EQUAL(6, c->denominator);
@@ -67,9 +67,9 @@ void test_add()
 
 void test_sub()
 {
-    Rashunal* a = n_Rashunal(1, 2);
-    Rashunal* b = n_Rashunal(1, 3);
-    Rashunal* c = r_sub(a, b);
+    Rashunal *a = n_Rashunal(1, 2);
+    Rashunal *b = n_Rashunal(1, 3);
+    Rashunal *c = r_sub(a, b);
     TEST_ASSERT_EQUAL(1, c->numerator);
     TEST_ASSERT_EQUAL(6, c->denominator);
     free(a);
@@ -79,9 +79,9 @@ void test_sub()
 
 void test_mul()
 {
-    Rashunal* a = n_Rashunal(1, 2);
-    Rashunal* b = n_Rashunal(1, 3);
-    Rashunal* c = r_mul(a, b);
+    Rashunal *a = n_Rashunal(1, 2);
+    Rashunal *b = n_Rashunal(1, 3);
+    Rashunal *c = r_mul(a, b);
     TEST_ASSERT_EQUAL(1, c->numerator);
     TEST_ASSERT_EQUAL(6, c->denominator);
     free(a);
@@ -91,9 +91,9 @@ void test_mul()
 
 void test_div()
 {
-    Rashunal* a = n_Rashunal(1, 2);
-    Rashunal* b = n_Rashunal(1, 3);
-    Rashunal* c = r_div(a, b);
+    Rashunal *a = n_Rashunal(1, 2);
+    Rashunal *b = n_Rashunal(1, 3);
+    Rashunal *c = r_div(a, b);
     TEST_ASSERT_EQUAL(3, c->numerator);
     TEST_ASSERT_EQUAL(2, c->denominator);
     free(a);
@@ -114,8 +114,8 @@ void test_div_raises_SIGFPE_if_denominator_is_zero()
 
 void test_inv()
 {
-    Rashunal* a = n_Rashunal(1, 2);
-    Rashunal* b = r_inv(a);
+    Rashunal *a = n_Rashunal(1, 2);
+    Rashunal *b = r_inv(a);
     TEST_ASSERT_EQUAL(2, b->numerator);
     TEST_ASSERT_EQUAL(1, b->denominator);
     free(a);
