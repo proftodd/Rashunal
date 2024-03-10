@@ -19,4 +19,7 @@ Rashunal* r_mul(Rashunal *a, Rashunal *b);
 Rashunal* r_div(Rashunal *a, Rashunal *b);
 Rashunal* r_inv(Rashunal *a);
 
+int printed_length(Rashunal *a);
+char* to_string(Rashunal *a);
+
 #endif

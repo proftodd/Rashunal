@@ -131,6 +131,38 @@ void test_inv_raises_SIGFPE_if_numerator_is_zero()
     free(q);
 }
 
+void test_printed_length()
+{
+    Rashunal *a = n_Rashunal(1, 10);
+    Rashunal *b = n_Rashunal(0, 1);
+    Rashunal *c = n_Rashunal(10, 1);
+    TEST_ASSERT_EQUAL(6, printed_length(a));
+    TEST_ASSERT_EQUAL(1, printed_length(b));
+    TEST_ASSERT_EQUAL(2, printed_length(c));
+    free(a);
+    free(b);
+    free(c);
+}
+
+void test_to_string()
+{
+    Rashunal *a = n_Rashunal(1, 10);
+    Rashunal *b = n_Rashunal(0, 1);
+    Rashunal *c = n_Rashunal(10, 1);
+    char *a_string = to_string(a);
+    char *b_string = to_string(b);
+    char *c_string = to_string(c);
+    TEST_ASSERT_EQUAL_STRING("1 / 10", a_string);
+    TEST_ASSERT_EQUAL_STRING("0", b_string);
+    TEST_ASSERT_EQUAL_STRING("10", c_string);
+    free(a);
+    free(b);
+    free(c);
+    free(a_string);
+    free(b_string);
+    free(c_string);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -144,6 +176,8 @@ int main(void)
     RUN_TEST(test_div_raises_SIGFPE_if_denominator_is_zero);
     RUN_TEST(test_inv);
     RUN_TEST(test_inv_raises_SIGFPE_if_numerator_is_zero);
+    RUN_TEST(test_printed_length);
+    RUN_TEST(test_to_string);
 
     return UNITY_END();
 }
