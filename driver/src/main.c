@@ -19,15 +19,23 @@ int main(int argc, char *argv[])
     Rashunal *rat_2 = n_Rashunal(1, 3);
     Rashunal *rat_3 = r_add(rat_1, rat_2);
     char *rat_3_string = to_string(rat_3);
+    char *rat_3_lstring = to_padded_string(rat_3, 10);
+    char *rat_3_rstring = to_padded_string(rat_3, -10);
     printf("%s\n", "The sum is:");
     printf("%s\n", rat_3_string);
+    printf("%s\n", rat_3_lstring);
+    printf("%s\n", rat_3_rstring);
 
     printf("%s\n", "");
 
     Rashunal *z = n_Rashunal(0, 2);
     char *z_string = to_string(z);
+    char *z_lstring = to_padded_string(z, 10);
+    char *z_rstring = to_padded_string(z, -10);
     printf("%s\n", "Zero:");
     printf("%s\n", z_string);
+    printf("%s\n", z_lstring);
+    printf("%s\n", z_rstring);
 
     printf("%s\n", "");
 
@@ -55,6 +63,11 @@ int main(int argc, char *argv[])
     free(rat_2);
     free(rat_3);
     free(rat_3_string);
+    free(rat_3_lstring);
+    free(rat_3_rstring);
+    free(z_string);
+    free(z_lstring);
+    free(z_rstring);
     free(u);
     free(q);
     signal(SIGFPE, orig_handler);

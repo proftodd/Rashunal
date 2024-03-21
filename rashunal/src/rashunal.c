@@ -99,3 +99,25 @@ char* to_string(Rashunal *a)
     }
     return s;
 }
+
+char* to_padded_string(Rashunal *a, int length)
+{
+    int actual_length = abs(length);
+    char *s = malloc(sizeof(char) * (actual_length + 1));
+    if (!s) {
+        return NULL;
+    }
+
+    char fmt[100];
+    sprintf(fmt, "%%%ds", length);
+
+    char *unpadded = to_string(a);
+    int copied_char_count = snprintf(s, actual_length + 1, fmt, unpadded);
+    free(unpadded);
+    if (copied_char_count != actual_length) {
+        free(s);
+        return NULL;
+    }
+
+    return s;
+}

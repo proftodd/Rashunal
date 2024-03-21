@@ -163,6 +163,26 @@ void test_to_string()
     free(c_string);
 }
 
+void test_to_padded_strings()
+{
+    Rashunal *a = n_Rashunal(1, 10);
+    Rashunal *b = n_Rashunal(10, 1);
+    char *al_string = to_padded_string(a, 6);
+    char *bl_string = to_padded_string(b, 6);
+    char *ar_string = to_padded_string(a, -6);
+    char *br_string = to_padded_string(b, -6);
+    TEST_ASSERT_EQUAL_STRING("1 / 10", al_string);
+    TEST_ASSERT_EQUAL_STRING("    10", bl_string);
+    TEST_ASSERT_EQUAL_STRING("1 / 10", ar_string);
+    TEST_ASSERT_EQUAL_STRING("10    ", br_string);
+    free(a);
+    free(b);
+    free(al_string);
+    free(bl_string);
+    free(ar_string);
+    free(br_string);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -178,6 +198,7 @@ int main(void)
     RUN_TEST(test_inv_raises_SIGFPE_if_numerator_is_zero);
     RUN_TEST(test_printed_length);
     RUN_TEST(test_to_string);
+    RUN_TEST(test_to_padded_strings);
 
     return UNITY_END();
 }
