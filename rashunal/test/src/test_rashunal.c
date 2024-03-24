@@ -131,6 +131,52 @@ void test_inv_raises_SIGFPE_if_numerator_is_zero()
     free(q);
 }
 
+void test_mds()
+{
+    Rashunal *pivot = ni_Rashunal(3);
+    Rashunal *base = ni_Rashunal(2);
+    Rashunal *a1 = ni_Rashunal(5);
+    Rashunal *b1 = ni_Rashunal(4);
+    Rashunal *a2 = ni_Rashunal(6);
+    Rashunal *b2 = ni_Rashunal(1);
+    Rashunal *p1 = r_mds(pivot, base, pivot, base);
+    Rashunal *p2 = r_mds(a1, b1, pivot, base);
+    Rashunal *p3 = r_mds(a2, b2, pivot, base);
+    Rashunal *e1 = ni_Rashunal(0);
+    Rashunal *e2 = ni_Rashunal(-1);
+    Rashunal *e3 = n_Rashunal(9, 2);
+    TEST_ASSERT_EQUAL_MEMORY(e1, p1, SIZER);
+    TEST_ASSERT_EQUAL_MEMORY(e2, p2, SIZER);
+    TEST_ASSERT_EQUAL_MEMORY(e3, p3, SIZER);
+    free(pivot);
+    free(base);
+    free(a1);
+    free(b1);
+    free(a2);
+    free(b2);
+    free(p1);
+    free(p2);
+    free(p3);
+    free(e1);
+    free(e2);
+    free(e3);
+}
+
+void test_mds_raises_SIGFPE_if_base_is_zero()
+{
+    Rashunal *pivot = ni_Rashunal(3);
+    Rashunal *base = ni_Rashunal(0);
+    Rashunal *a = ni_Rashunal(5);
+    Rashunal *b = ni_Rashunal(4);
+    Rashunal *p = r_mds(a, b, pivot, base);
+    TEST_ASSERT_NOT_EQUAL(0, signal_sent);
+    free(pivot);
+    free(base);
+    free(a);
+    free(b);
+    free(p);
+}
+
 void test_printed_length()
 {
     Rashunal *a = n_Rashunal(1, 10);
@@ -196,6 +242,8 @@ int main(void)
     RUN_TEST(test_div_raises_SIGFPE_if_denominator_is_zero);
     RUN_TEST(test_inv);
     RUN_TEST(test_inv_raises_SIGFPE_if_numerator_is_zero);
+    RUN_TEST(test_mds);
+    RUN_TEST(test_mds_raises_SIGFPE_if_base_is_zero);
     RUN_TEST(test_printed_length);
     RUN_TEST(test_to_string);
     RUN_TEST(test_to_padded_strings);

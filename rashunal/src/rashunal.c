@@ -65,6 +65,20 @@ Rashunal* r_inv(Rashunal* a)
     return n_Rashunal(a->denominator, a->numerator);
 }
 
+Rashunal* r_mds(Rashunal *a, Rashunal *b, Rashunal *pivot, Rashunal *base)
+{
+    int n1 = a->numerator * base->numerator;
+    int d1 = a->denominator * base->denominator;
+
+    int n2 = b->numerator * pivot->numerator;
+    int d2 = b->denominator * pivot->denominator;
+
+    int n3 = n1 * d2 - n2 * d1;
+    int d3 = d1 * d2;
+
+    return n_Rashunal(n3 * base->denominator, d3 * base->numerator);
+}
+
 int printed_length(Rashunal *a)
 {
     if (a->numerator == 0) {
