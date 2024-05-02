@@ -1,3 +1,4 @@
+#include <signal.h>
 #include <stdlib.h>
 #include "unity.h"
 #include "rashunal.h"
