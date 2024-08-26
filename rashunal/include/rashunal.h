@@ -7,9 +7,6 @@ typedef struct
     const int denominator;
 } Rashunal;
 
-int gcd(int a, int b);
-int lcm(int a, int b);
-
 Rashunal* n_Rashunal(int numerator, int denominator);
 Rashunal* ni_Rashunal(int numerator);
 
