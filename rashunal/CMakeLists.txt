@@ -1,4 +1,5 @@
 include(GNUInstallDirs)
+option(RASHUNAL_BUILD_TESTS "Build Rashunal's unit tests" ON)
 
 add_library(rashunal SHARED src/rashunal.c src/rashunal_util.c)
 target_include_directories(rashunal
@@ -9,7 +10,9 @@ target_include_directories(rashunal
 target_link_libraries(rashunal m)
 target_compile_options(rashunal PRIVATE -Wall -Werror)
 
-add_subdirectory(test)
+if (RASHUNAL_BUILD_TESTS)
+    add_subdirectory(test)
+endif()
 
 set_target_properties (
     rashunal
