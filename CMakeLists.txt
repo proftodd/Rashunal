@@ -8,5 +8,4 @@ project(rashunal
 enable_testing()
 
 add_subdirectory(rashunal)
-add_subdirectory(external)
 add_subdirectory(driver)

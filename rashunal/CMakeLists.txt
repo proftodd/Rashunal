@@ -11,6 +11,15 @@ target_link_libraries(rashunal m)
 target_compile_options(rashunal PRIVATE -Wall -Werror)
 
 if (RASHUNAL_BUILD_TESTS)
+    include(FetchContent)
+
+    FetchContent_Declare(
+        Unity
+        GIT_REPOSITORY https://github.com/ThrowTheSwitch/Unity.git
+        GIT_TAG master
+    )
+    FetchContent_MakeAvailable(Unity)
+
     add_subdirectory(test)
 endif()
 
