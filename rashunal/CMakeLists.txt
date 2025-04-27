@@ -1,3 +1,5 @@
+include(GNUInstallDirs)
+
 add_library(rashunal SHARED src/rashunal.c src/rashunal_util.c)
 target_include_directories(rashunal
     PUBLIC
@@ -5,23 +7,43 @@ target_include_directories(rashunal
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 target_link_libraries(rashunal m)
-target_compile_options(rashunal PRIVATE -Werror)
+target_compile_options(rashunal PRIVATE -Wall -Werror)
 
 add_subdirectory(test)
-
-set(PUBLIC_HEADERS_FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/rashunal_util.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/rashunal.h"
-)
 
 set_target_properties (
     rashunal
     PROPERTIES
-    PUBLIC_HEADER "${PUBLIC_HEADERS_FILES}"
+    VERSION ${PROJECT_VERSION}
+    SOVERSION 1
 )
 
 install(
     TARGETS rashunal
+    EXPORT rashunalTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+install(EXPORT rashunalTargets
+  FILE rashunalTargets.cmake
+  NAMESPACE rashunal::
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rashunal"
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/rashunalConfig.cmake
+    DESTINATION lib/cmake/rashunal
+)
+
+include (CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/rashunalConfig.cmake"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rashunal"
 )
