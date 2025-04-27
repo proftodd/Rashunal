@@ -19,6 +19,7 @@ if (RASHUNAL_BUILD_TESTS)
         GIT_TAG master
     )
     FetchContent_MakeAvailable(Unity)
+    FetchContent_GetProperties(Unity)
 
     add_subdirectory(test)
 endif()

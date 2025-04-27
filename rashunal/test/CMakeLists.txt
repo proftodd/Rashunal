@@ -1,5 +1,5 @@
 if (RASHUNAL_BUILD_TESTS)
-    add_library(Unity STATIC ${unity_SOURCE_DIR}/src/Unity.c)
+    add_library(Unity STATIC "${unity_SOURCE_DIR}/src/unity.c")
     target_include_directories(Unity PUBLIC "${unity_SOURCE_DIR}/src")
 
     add_executable(test_rashunal_app src/test_rashunal.c)
