@@ -53,3 +53,7 @@ dkms.conf
 
 # CMake output directory
 build
+
+# IDEs
+.idea
+.vscode
