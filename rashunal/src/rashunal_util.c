@@ -12,3 +12,20 @@ int lcm(int a, int b)
 {
     return a / gcd(a, b) * b;
 }
+
+int count_digits(const int n)
+{
+    int nn = n;
+    int count;
+    if (nn < 0) {
+        nn *= -1;
+        count = 2;
+    } else {
+        count = 1;
+    }
+    while (nn >= 10) {
+        nn /= 10;
+        ++count;
+    }
+    return count;
+}
