@@ -84,9 +84,9 @@ int printed_length(Rashunal *a)
     if (a->numerator == 0) {
         return 1;
     } else if (a->denominator == 1) {
-        return snprintf(NULL, 0, "%d", a->numerator);
+        return count_digits(a->numerator);;
     } else {
-        return snprintf(NULL, 0, "%d / %d", a->numerator, a->denominator);
+        return count_digits(a->numerator) + count_digits(a->denominator) + 3;
     }
 }
 
