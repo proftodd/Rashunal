@@ -8,4 +8,5 @@ project(rashunal
 enable_testing()
 
 add_subdirectory(rashunal)
+add_library(rashunal::rashunal ALIAS rashunal)
 add_subdirectory(driver)
