@@ -230,6 +230,29 @@ void test_to_padded_strings()
     free(br_string);
 }
 
+void test_rcmp()
+{
+    Rashunal *a = n_Rashunal(1, 2);
+    Rashunal *b = n_Rashunal(-1, 2);
+    Rashunal *c = n_Rashunal(2, 3);
+    Rashunal *d = n_Rashunal(3, 2);
+    Rashunal *e = ni_Rashunal(1);
+    Rashunal *f = n_Rashunal(2, 3);
+
+    TEST_ASSERT_TRUE(r_cmp(a, b) > 0);
+    TEST_ASSERT_TRUE(r_cmp(a, c) < 0);
+    TEST_ASSERT_TRUE(r_cmp(d, c) > 1);
+    TEST_ASSERT_TRUE(r_cmp(a, e) < 0);
+    TEST_ASSERT_TRUE(r_cmp(f, c) == 0);
+
+    free(a);
+    free(b);
+    free(c);
+    free(d);
+    free(e);
+    free(f);
+}
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -248,6 +271,7 @@ int main(void)
     RUN_TEST(test_printed_length);
     RUN_TEST(test_to_string);
     RUN_TEST(test_to_padded_strings);
+    RUN_TEST(test_rcmp);
 
     return UNITY_END();
 }

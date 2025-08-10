@@ -135,3 +135,8 @@ char* to_padded_string(Rashunal *a, int length)
 
     return s;
 }
+
+int r_cmp(Rashunal *a, Rashunal *b)
+{
+    return b->denominator * a->numerator - a->denominator * b->numerator;
+}

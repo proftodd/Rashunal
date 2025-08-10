@@ -21,4 +21,6 @@ int printed_length(Rashunal *a);
 char* to_string(Rashunal *a);
 char* to_padded_string(Rashunal *a, int length);
 
+int r_cmp(Rashunal *a, Rashunal *b);
+
 #endif
