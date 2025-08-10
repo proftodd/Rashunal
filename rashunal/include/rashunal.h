@@ -10,17 +10,17 @@ typedef struct
 Rashunal* n_Rashunal(int numerator, int denominator);
 Rashunal* ni_Rashunal(int numerator);
 
-Rashunal* r_add(Rashunal *a, Rashunal *b);
-Rashunal* r_sub(Rashunal *a, Rashunal *b);
-Rashunal* r_mul(Rashunal *a, Rashunal *b);
-Rashunal* r_div(Rashunal *a, Rashunal *b);
-Rashunal* r_mds(Rashunal *a, Rashunal *b, Rashunal *pivot, Rashunal *base);
-Rashunal* r_inv(Rashunal *a);
+Rashunal* r_add(const Rashunal *a, const Rashunal *b);
+Rashunal* r_sub(const Rashunal *a, const Rashunal *b);
+Rashunal* r_mul(const Rashunal *a, const Rashunal *b);
+Rashunal* r_div(const Rashunal *a, const Rashunal *b);
+Rashunal* r_mds(const Rashunal *a, const Rashunal *b, const Rashunal *pivot, const Rashunal *base);
+Rashunal* r_inv(const Rashunal *a);
 
-int printed_length(Rashunal *a);
-char* to_string(Rashunal *a);
-char* to_padded_string(Rashunal *a, int length);
+int printed_length(const Rashunal *a);
+char* to_string(const Rashunal *a);
+char* to_padded_string(const Rashunal *a, int length);
 
-int r_cmp(Rashunal *a, Rashunal *b);
+int r_cmp(const Rashunal *a, const Rashunal *b);
 
 #endif

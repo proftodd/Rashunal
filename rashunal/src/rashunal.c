@@ -38,34 +38,34 @@ Rashunal* ni_Rashunal(int an_int)
     return n_Rashunal(an_int, 1);
 }
 
-Rashunal* r_add(Rashunal *a, Rashunal *b)
+Rashunal* r_add(const Rashunal *a, const Rashunal *b)
 {
     int new_d = lcm(a->denominator, b->denominator);
     return n_Rashunal(a->numerator * new_d / a->denominator + b->numerator * new_d / b->denominator, new_d);
 }
 
-Rashunal* r_sub(Rashunal *a, Rashunal *b)
+Rashunal* r_sub(const Rashunal *a, const Rashunal *b)
 {
     int new_d = lcm(a->denominator, b->denominator);
     return n_Rashunal(a->numerator * new_d / a->denominator - b->numerator * new_d / b->denominator, new_d);
 }
 
-Rashunal* r_mul(Rashunal *a, Rashunal *b)
+Rashunal* r_mul(const Rashunal *a, const Rashunal *b)
 {
     return n_Rashunal(a->numerator * b->numerator, a->denominator * b->denominator);
 }
 
-Rashunal* r_div(Rashunal *a, Rashunal *b)
+Rashunal* r_div(const Rashunal *a, const Rashunal *b)
 {
     return n_Rashunal(a->numerator * b->denominator, a->denominator * b->numerator);
 }
 
-Rashunal* r_inv(Rashunal* a)
+Rashunal* r_inv(const Rashunal* a)
 {
     return n_Rashunal(a->denominator, a->numerator);
 }
 
-Rashunal* r_mds(Rashunal *a, Rashunal *b, Rashunal *pivot, Rashunal *base)
+Rashunal* r_mds(const Rashunal *a, const Rashunal *b, const Rashunal *pivot, const Rashunal *base)
 {
     int n1 = a->numerator * base->numerator;
     int d1 = a->denominator * base->denominator;
@@ -79,7 +79,7 @@ Rashunal* r_mds(Rashunal *a, Rashunal *b, Rashunal *pivot, Rashunal *base)
     return n_Rashunal(n3 * base->denominator, d3 * base->numerator);
 }
 
-int printed_length(Rashunal *a)
+int printed_length(const Rashunal *a)
 {
     if (a->numerator == 0) {
         return 1;
@@ -90,7 +90,7 @@ int printed_length(Rashunal *a)
     }
 }
 
-char* to_string(Rashunal *a)
+char* to_string(const Rashunal *a)
 {
     int r_length = printed_length(a);
     char *s = malloc(sizeof(char) * (r_length + 1));
@@ -114,7 +114,7 @@ char* to_string(Rashunal *a)
     return s;
 }
 
-char* to_padded_string(Rashunal *a, int length)
+char* to_padded_string(const Rashunal *a, int length)
 {
     int actual_length = abs(length);
     char *s = malloc(sizeof(char) * (actual_length + 1));
@@ -136,7 +136,7 @@ char* to_padded_string(Rashunal *a, int length)
     return s;
 }
 
-int r_cmp(Rashunal *a, Rashunal *b)
+int r_cmp(const Rashunal *a, const Rashunal *b)
 {
     return b->denominator * a->numerator - a->denominator * b->numerator;
 }
