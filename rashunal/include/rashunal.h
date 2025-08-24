@@ -9,6 +9,7 @@ typedef struct
 
 Rashunal* n_Rashunal(int numerator, int denominator);
 Rashunal* ni_Rashunal(int numerator);
+Rashunal* nr_Rashunal(const Rashunal *r);
 
 Rashunal* r_add(const Rashunal *a, const Rashunal *b);
 Rashunal* r_sub(const Rashunal *a, const Rashunal *b);

@@ -38,6 +38,11 @@ Rashunal* ni_Rashunal(int an_int)
     return n_Rashunal(an_int, 1);
 }
 
+Rashunal* nr_Rashunal(const Rashunal *r)
+{
+    return n_Rashunal(r->numerator, r->denominator);
+}
+
 Rashunal* r_add(const Rashunal *a, const Rashunal *b)
 {
     int new_d = lcm(a->denominator, b->denominator);
