@@ -183,7 +183,7 @@ void test_printed_length()
     Rashunal *a = n_Rashunal(1, 10);
     Rashunal *b = n_Rashunal(0, 1);
     Rashunal *c = n_Rashunal(10, 1);
-    TEST_ASSERT_EQUAL(6, printed_length(a));
+    TEST_ASSERT_EQUAL(4, printed_length(a));
     TEST_ASSERT_EQUAL(1, printed_length(b));
     TEST_ASSERT_EQUAL(2, printed_length(c));
     free(a);
@@ -199,7 +199,7 @@ void test_to_string()
     char *a_string = to_string(a);
     char *b_string = to_string(b);
     char *c_string = to_string(c);
-    TEST_ASSERT_EQUAL_STRING("1 / 10", a_string);
+    TEST_ASSERT_EQUAL_STRING("1/10", a_string);
     TEST_ASSERT_EQUAL_STRING("0", b_string);
     TEST_ASSERT_EQUAL_STRING("10", c_string);
     free(a);
@@ -218,9 +218,9 @@ void test_to_padded_strings()
     char *bl_string = to_padded_string(b, 6);
     char *ar_string = to_padded_string(a, -6);
     char *br_string = to_padded_string(b, -6);
-    TEST_ASSERT_EQUAL_STRING("1 / 10", al_string);
+    TEST_ASSERT_EQUAL_STRING("  1/10", al_string);
     TEST_ASSERT_EQUAL_STRING("    10", bl_string);
-    TEST_ASSERT_EQUAL_STRING("1 / 10", ar_string);
+    TEST_ASSERT_EQUAL_STRING("1/10  ", ar_string);
     TEST_ASSERT_EQUAL_STRING("10    ", br_string);
     free(a);
     free(b);

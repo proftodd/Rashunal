@@ -91,7 +91,7 @@ int printed_length(const Rashunal *a)
     } else if (a->denominator == 1) {
         return count_digits(a->numerator);;
     } else {
-        return count_digits(a->numerator) + count_digits(a->denominator) + 3;
+        return count_digits(a->numerator) + count_digits(a->denominator) + 1;
     }
 }
 
@@ -109,7 +109,7 @@ char* to_string(const Rashunal *a)
     } else if (a->denominator == 1) {
         copied_char_count = snprintf(s, r_length + 1, "%d", a->numerator);
     } else {
-        copied_char_count = snprintf(s, r_length + 1, "%d / %d", a->numerator, a->denominator);
+        copied_char_count = snprintf(s, r_length + 1, "%d/%d", a->numerator, a->denominator);
     }
 
     if (copied_char_count != r_length) {
