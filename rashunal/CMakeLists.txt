@@ -1,3 +1,4 @@
+include(CheckLibraryExists)
 include(GNUInstallDirs)
 option(RASHUNAL_BUILD_TESTS "Build Rashunal's unit tests" ON)
 
@@ -7,8 +8,27 @@ target_include_directories(rashunal
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
-target_link_libraries(rashunal m)
-target_compile_options(rashunal PRIVATE -Wall -Werror)
+set_target_properties(rashunal
+    PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/rashunal/Debug"
+        ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/rashunal/Release"
+        LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/rashunal/Debug"
+        LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/rashunal/Release"
+        RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/rashunal/Debug"
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/rashunal/Release"
+)
+
+check_library_exists(m abs "" NEED_LIBM)
+if (NEED_LIBM)
+  target_link_libraries(rashunal m)
+endif()
+
+target_compile_definitions(rashunal PRIVATE RASHUNAL_BUILD_DLL)
+if (MSVC)
+  target_compile_options(rashunal PRIVATE /W4)
+else()
+  target_compile_options(rashunal PRIVATE -Wall -Werror)
+endif()
 
 if (RASHUNAL_BUILD_TESTS)
     include(FetchContent)
