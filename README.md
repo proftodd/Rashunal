@@ -10,7 +10,7 @@ $ make ..
 $ make && make test
 ```
 If you like what you see,
-`sudo make install`
+`sudo cmake --install .`
 
 I've only tested the build, compilation, testing, and installation on my Mac. CMake is supposed to be cross-platform, but YMMV.
 

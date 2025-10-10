@@ -2,6 +2,17 @@ include(CheckLibraryExists)
 include(GNUInstallDirs)
 option(RASHUNAL_BUILD_TESTS "Build Rashunal's unit tests" ON)
 
+set(PACKAGE_NAME rashunal)
+set(PACKAGE_VERSION 0.0.1)
+set(PACKAGE_DESC "Rational arithmetic library")
+set(PKGCONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/rashunal.pc.in
+  ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}.pc
+  @ONLY
+)
+
 add_library(rashunal SHARED src/rashunal.c src/rashunal_util.c)
 target_include_directories(rashunal
     PUBLIC
@@ -68,9 +79,14 @@ install(EXPORT rashunalTargets
   DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/rashunal"
 )
 
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/rashunalConfig.cmake
-    DESTINATION lib/cmake/rashunal
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/rashunalConfig.cmake
+  DESTINATION lib/cmake/rashunal
+)
+
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}.pc
+  DESTINATION ${PKGCONFIG_INSTALL_DIR}
 )
 
 include (CMakePackageConfigHelpers)
