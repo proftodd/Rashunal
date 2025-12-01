@@ -1,9 +1,22 @@
 #include <signal.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "rashunal.h"
 #include "rashunal_util.h"
+
+static Rashunal* r_agg(Rashunal *init, Rashunal * (*aggregator)(const Rashunal *, const Rashunal *), int count, va_list args)
+{
+    Rashunal *agg = nr_Rashunal(init);
+    Rashunal *old_agg;
+    for (int i = 0; i < count; ++i) {
+        old_agg = agg;
+        agg = aggregator(old_agg, va_arg(args, Rashunal *));
+        free(old_agg);
+    }
+    return agg;
+}
 
 Rashunal* n_Rashunal(int numerator, int denominator)
 {
@@ -49,6 +62,17 @@ Rashunal* r_add(const Rashunal *a, const Rashunal *b)
     return n_Rashunal(a->numerator * new_d / a->denominator + b->numerator * new_d / b->denominator, new_d);
 }
 
+Rashunal* r_add_some(const int rashunal_count, ...)
+{
+    Rashunal *zero = ni_Rashunal(0);
+    va_list args;
+    va_start(args, rashunal_count);
+    Rashunal *sum = r_agg(zero, r_add, rashunal_count, args);
+    va_end(args);
+    free(zero);
+    return sum;
+}
+
 Rashunal* r_sub(const Rashunal *a, const Rashunal *b)
 {
     int new_d = lcm(a->denominator, b->denominator);
@@ -58,6 +82,17 @@ Rashunal* r_sub(const Rashunal *a, const Rashunal *b)
 Rashunal* r_mul(const Rashunal *a, const Rashunal *b)
 {
     return n_Rashunal(a->numerator * b->numerator, a->denominator * b->denominator);
+}
+
+Rashunal* r_mul_some(const int rashunal_count, ...)
+{
+    Rashunal *one = ni_Rashunal(1);
+    va_list args;
+    va_start(args, rashunal_count);
+    Rashunal *prd = r_agg(one, r_mul, rashunal_count, args);
+    va_end(args);
+    free(one);
+    return prd;
 }
 
 Rashunal* r_div(const Rashunal *a, const Rashunal *b)
