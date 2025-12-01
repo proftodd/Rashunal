@@ -66,6 +66,17 @@ void test_add()
     free(e);
 }
 
+void test_add_some()
+{
+    Rashunal a = { .numerator = 1, .denominator = 2 };
+    Rashunal b = { .numerator = 1, .denominator = 3 };
+    Rashunal c = { .numerator = 1, .denominator = 1 };
+    Rashunal e = { .numerator = 11, .denominator = 6 };
+    Rashunal *o = r_add_some(3, &a, &b, &c);
+    TEST_ASSERT_EQUAL(0, r_cmp(&e, o));
+    free(o);
+}
+
 void test_sub()
 {
     Rashunal *a = n_Rashunal(1, 2);
@@ -88,6 +99,17 @@ void test_mul()
     free(a);
     free(b);
     free(c);
+}
+
+void test_mul_some()
+{
+    Rashunal a = { .numerator = 1, .denominator = 2 };
+    Rashunal b = { .numerator = 1, .denominator = 3 };
+    Rashunal c = { .numerator = 1, .denominator = 1 };
+    Rashunal e = { .numerator = 1, .denominator = 6 };
+    Rashunal *o = r_mul_some(3, &a, &b, &c);
+    TEST_ASSERT_EQUAL(0, r_cmp(&e, o));
+    free(o);
 }
 
 void test_div()
@@ -260,8 +282,10 @@ int main(void)
     RUN_TEST(test_n_Rashunal_normalizes_numerator_and_denominator);
     RUN_TEST(test_n_Rashunal_raises_SIGFPE_if_denominator_is_zero);
     RUN_TEST(test_add);
+    RUN_TEST(test_add_some);
     RUN_TEST(test_sub);
     RUN_TEST(test_mul);
+    RUN_TEST(test_mul_some);
     RUN_TEST(test_div);
     RUN_TEST(test_div_raises_SIGFPE_if_denominator_is_zero);
     RUN_TEST(test_inv);

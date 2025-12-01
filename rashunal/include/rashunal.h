@@ -24,8 +24,10 @@ RASHUNAL_API Rashunal* ni_Rashunal(int numerator);
 RASHUNAL_API Rashunal* nr_Rashunal(const Rashunal *r);
 
 RASHUNAL_API Rashunal* r_add(const Rashunal *a, const Rashunal *b);
+RASHUNAL_API Rashunal* r_add_some(const int rashunal_count, ...);
 RASHUNAL_API Rashunal* r_sub(const Rashunal *a, const Rashunal *b);
 RASHUNAL_API Rashunal* r_mul(const Rashunal *a, const Rashunal *b);
+RASHUNAL_API Rashunal* r_mul_some(const int rashunal_count, ...);
 RASHUNAL_API Rashunal* r_div(const Rashunal *a, const Rashunal *b);
 RASHUNAL_API Rashunal* r_mds(const Rashunal *a, const Rashunal *b, const Rashunal *pivot, const Rashunal *base);
 RASHUNAL_API Rashunal* r_inv(const Rashunal *a);
